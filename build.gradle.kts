@@ -30,6 +30,7 @@ dependencies {
     implementation(libs.supabase.auth)
     implementation(libs.koin.ktor)
     implementation(libs.koin.logger)
+    implementation(libs.dotenv)
 
     testImplementation(kotlin("test"))
     testImplementation(libs.ktor.server.test.host)

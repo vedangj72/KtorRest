@@ -10,13 +10,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
+import org.koin.ktor.ext.inject
 
 @Serializable
 data class PostRequest(
     val name: String
 )
 
-fun Application.configureRouting(supabase: SupabaseClient) {
+fun Application.configureRouting() {
+    val service by inject<SupabaseClient>()
     routing {
         healthCheck()
         userRoute()
