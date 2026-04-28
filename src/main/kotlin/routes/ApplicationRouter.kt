@@ -1,5 +1,6 @@
 package com.example.routes
 
+import io.github.jan.supabase.SupabaseClient
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.*
 import io.ktor.server.request.receive
@@ -15,7 +16,7 @@ data class PostRequest(
     val name: String
 )
 
-fun Application.configureRouting() {
+fun Application.configureRouting(supabase: SupabaseClient) {
     routing {
         healthCheck()
         userRoute()

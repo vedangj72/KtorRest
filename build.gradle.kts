@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.serialization)
-    alias(ktorLibs.plugins.ktor)
+    application
 }
 
 group = "com.example"
@@ -19,11 +19,18 @@ dependencies {
     implementation(libs.ktor.server.status.pages)
     implementation(libs.ktor.server.content.negotiation)
     implementation(libs.ktor.serialization.kotlinx.json)
-    implementation(ktorLibs.server.config.yaml)
-    implementation(ktorLibs.server.core)
-    implementation(ktorLibs.server.netty)
+    implementation(libs.ktor.server.config.yaml)
+    implementation(libs.ktor.server.core)
+    implementation(libs.ktor.server.netty)
+    implementation(libs.ktor.client.cio)
+    implementation(libs.ktor.client.content.negotiation)
+    implementation(libs.ktor.client.serialization.kotlinx.json)
     implementation(libs.logback.classic)
+    implementation(libs.supabase.postgrest)
+    implementation(libs.supabase.auth)
+    implementation(libs.koin.ktor)
+    implementation(libs.koin.logger)
 
     testImplementation(kotlin("test"))
-    testImplementation(ktorLibs.server.testHost)
+    testImplementation(libs.ktor.server.test.host)
 }
