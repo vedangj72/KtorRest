@@ -19,6 +19,7 @@ class ApiHandler(val client: SupabaseClient) {
     }
 
     fun mapToAppException(e: Exception): AppException {
+
         return when (e) {
             is AppException -> e
 
@@ -27,7 +28,6 @@ class ApiHandler(val client: SupabaseClient) {
                     HttpStatusCode.ServiceUnavailable,
                     "Network error, please try again"
                 )
-
             is io.ktor.client.network.sockets.SocketTimeoutException ->
                 AppException(
                     HttpStatusCode.GatewayTimeout,
