@@ -18,7 +18,6 @@ data class PostRequest(
 )
 
 fun Application.configureRouting() {
-    val service by inject<SupabaseClient>()
     routing {
         healthCheck()
         userRoute()

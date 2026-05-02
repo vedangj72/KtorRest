@@ -7,7 +7,7 @@ import org.koin.dsl.module
 
 val appModule = module {
 
-    single { ApiHandler(get()) }
-    single { UserRepository(get()) }
-    single { UserController(get()) }
+    single<ApiHandler> { ApiHandler(get()) }
+    single<UserRepository> { UserRepository(get()) }
+    single<UserController> { UserController(get()) }
 }
