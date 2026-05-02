@@ -58,9 +58,8 @@ class ApiHandler(val client: SupabaseClient) {
         body: T
     ): T = execute {
         client.from(table)
-            .insert(body) {
-                select()
-            }
-            .decodeSingle<T>()
+            .insert(body)
+
+        body
     }
 }

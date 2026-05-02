@@ -9,3 +9,10 @@ data class User(
     val email:String,
     val password:String,
 )
+
+@Serializable
+data class UserRequest(
+    val name:String,
+    val email:String,
+    val password:String,
+)

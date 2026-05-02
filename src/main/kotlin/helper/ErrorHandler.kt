@@ -10,7 +10,7 @@ open class AppException(
 class NotFoundException(message: String = "Not Found") :
     AppException(HttpStatusCode.NotFound, message)
 
-class BadRequestException(message: String = "Bad Request") :
+class BadRequest(message: String = "Bad Request") :
     AppException(HttpStatusCode.BadRequest, message)
 
 class UnauthorizedException(message: String = "Unauthorized") :

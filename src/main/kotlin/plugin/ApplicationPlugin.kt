@@ -6,9 +6,11 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
+import io.ktor.server.plugins.BadRequestException
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.server.plugins.statuspages.StatusPages
 import io.ktor.server.response.respond
+import kotlinx.coroutines.CancellationException
 
 fun Application.configurePlugin(){
     install(ContentNegotiation) {
@@ -34,13 +36,24 @@ fun Application.configurePlugin(){
                 )
             )
         }
-        exception<Throwable> { call, _ ->
-            val status = HttpStatusCode.InternalServerError
+        exception<BadRequestException> { call, _ ->
+            val status = HttpStatusCode.BadRequest
             call.respond(
                 status = status,
                 message = errorResponse(
                     status = status.value,
-                    message = "Something went wrong"
+                    message = "Invalid request body"
+                )
+            )
+        }
+        exception<Throwable> { call, cause ->
+            val status = HttpStatusCode.InternalServerError
+            call.application.environment.log.error("Unhandled request error", cause)
+            call.respond(
+                status = status,
+                message = errorResponse(
+                    status = status.value,
+                    message = cause.toString()
                 )
             )
         }
