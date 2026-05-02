@@ -31,6 +31,7 @@ dependencies {
     implementation(libs.koin.ktor)
     implementation(libs.koin.logger)
     implementation(libs.dotenv)
+    implementation("io.ktor:ktor-server-auth-jwt:3.4.0")
 
     testImplementation(kotlin("test"))
     testImplementation(libs.ktor.server.test.host)

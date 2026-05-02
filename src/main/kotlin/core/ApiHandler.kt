@@ -41,7 +41,27 @@ class ApiHandler(val client: SupabaseClient) {
                 )
         }
     }
+    suspend inline fun <reified T : Any> get(
 
+        table: String,
+
+        column: String,
+
+        value: String
+
+    ): List<T> = execute {
+
+        client.from(table)
+
+            .select {
+
+                filter { eq(column, value) }
+
+            }
+
+            .decodeList<T>()
+
+    }
     suspend inline fun <reified T : Any> getById(
         table: String,
         id: String
@@ -61,5 +81,12 @@ class ApiHandler(val client: SupabaseClient) {
             .insert(body)
 
         body
+    }
+    suspend inline fun <reified T : Any> getAll(
+        table: String
+    ): List<T> = execute {
+        client.from(table)
+            .select()
+            .decodeList<T>()
     }
 }
