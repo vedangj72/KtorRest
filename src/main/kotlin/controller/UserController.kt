@@ -4,6 +4,7 @@ import com.example.helper.BadRequestException
 import com.example.models.User
 import com.example.models.successResponse
 import com.example.repository.UserRepository
+import com.example.utils.IdUtils
 import com.example.utils.isValidEmail
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.ApplicationCall
@@ -15,10 +16,16 @@ class UserController(
 ) {
 
     suspend fun addUser(call: ApplicationCall) {
-        val user = call.receive<User>()
-        if (!user.email.isValidEmail()) {
+        val request = call.receive<User>()
+        if (!request.email.isValidEmail()) {
             throw BadRequestException("Invalid email format")
         }
+        val user = User(
+            id = IdUtils.generateId(),
+            name = request.name,
+            email = request.email,
+            password = request.password
+        )
         val createdUser = repo.addUser(user)
 
         call.respond(
