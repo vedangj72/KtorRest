@@ -1,7 +1,6 @@
 package com.example.controller
 
-import com.example.core.JwtService
-import com.example.models.AuthResponse
+import com.example.helper.JwtService
 import com.example.models.LoginRequest
 import com.example.helper.BadRequest
 import com.example.helper.ResponseHandler
@@ -43,9 +42,7 @@ class UserController(
 
     suspend fun login(call: ApplicationCall) {
         val request = call.receive<LoginRequest>()
-
         val user = repo.findByEmail(request.email)
-
         if (user == null || user.password != request.password) {
             call.respond(
                 HttpStatusCode.Unauthorized,
@@ -53,12 +50,8 @@ class UserController(
             )
             return
         }
-
         val accessToken = JwtService.generateAccessToken(user.email)
         val refreshToken = JwtService.generateRefreshToken(user.email)
-
-
-
         ResponseHandler.success(
             call = call,
             data = LoginResponse(accessToken, refreshToken),

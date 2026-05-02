@@ -18,9 +18,11 @@ fun Application.module() {
         modules(supabaseModule, appModule)
     }
 
-    install(LoggingPlugin)   // optional
+    install(LoggingPlugin)
 
     configurePlugin()
     configureSecurity()
     configureRouting()
 }
+
+//adding cors  implementation("io.ktor:ktor-server-cors:$ktor_version")

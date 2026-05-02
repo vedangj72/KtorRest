@@ -1,7 +1,7 @@
 package com.example.plugin
 
 
-import com.example.core.JwtService
+import com.example.helper.JwtService
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*

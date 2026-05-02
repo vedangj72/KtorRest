@@ -12,7 +12,7 @@ import io.ktor.server.routing.route
 import org.koin.ktor.ext.inject
 import io.ktor.server.response.respond
 
-fun Route.userRoute(){
+fun Route.userRoute() {
     val controller by inject<UserController>()
 
     route("/users") {
