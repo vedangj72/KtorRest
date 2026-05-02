@@ -8,9 +8,6 @@ import com.example.helper.ResponseHandler
 import com.example.models.User
 import com.example.models.UserRequest
 import com.example.repository.UserRepository
-import io.ktor.http.HttpStatusCode
-import io.ktor.server.application.*
-import io.ktor.server.request.*
 import io.ktor.server.response.*
 
 import com.example.utils.IdUtils
