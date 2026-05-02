@@ -5,6 +5,7 @@ import com.example.models.AuthResponse
 import com.example.models.LoginRequest
 import com.example.helper.BadRequest
 import com.example.helper.ResponseHandler
+import com.example.models.LoginResponse
 import com.example.models.User
 import com.example.models.UserRequest
 import com.example.repository.UserRepository
@@ -56,15 +57,21 @@ class UserController(
         val accessToken = JwtService.generateAccessToken(user.email)
         val refreshToken = JwtService.generateRefreshToken(user.email)
 
-        call.respond(
-            HttpStatusCode.OK,
-            AuthResponse(accessToken, refreshToken)
+
+
+        ResponseHandler.success(
+            call = call,
+            data = LoginResponse(accessToken, refreshToken),
+            message = "Logged in successfully",
+            status = HttpStatusCode.OK.value
         )
     }
+
     suspend fun getAllUsers(call: ApplicationCall) {
-
         val users = repo.getAllUsers()
-
-        call.respond(users)
+        ResponseHandler.success(
+            call = call,
+            data = users,
+        )
     }
 }
